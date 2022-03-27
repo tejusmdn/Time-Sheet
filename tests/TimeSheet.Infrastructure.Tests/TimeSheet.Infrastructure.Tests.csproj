@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TimeSheet.Infrastructure\TimeSheet.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
