@@ -7,8 +7,8 @@ using TimeSheet.Core.Models;
 
 namespace TimeSheet.Core.Interfaces.Services
 {
-    public interface IWorkItemService
+    public interface ITimeSheetEntryService
     {
-        Task<IEnumerable<WorkItemModel>> GetCurrentSprintItems();
+        Task<TimeSheetData> GetCurrentSprintItems(string project, string team);
     }
 }

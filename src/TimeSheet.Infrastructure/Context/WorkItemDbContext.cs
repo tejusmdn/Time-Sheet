@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +7,15 @@ using TimeSheet.Infrastructure.Entities;
 
 namespace TimeSheet.Infrastructure.Context
 {
-    public class WorkItemDbContext : DbContext
+    public class WorkItemDbContext
     {
-        public WorkItemDbContext(DbContextOptions<WorkItemDbContext> options) : base(options)
-        {
-            
-        }
+        private readonly string account;
+        private readonly string key;
 
-        public virtual DbSet<WorkItem> WorkItems { get; set; }
+        public WorkItemDbContext(string account, string key)
+        {
+            this.account = account;
+            this.key = key;
+        }
     }
 }

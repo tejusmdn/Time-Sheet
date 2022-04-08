@@ -9,7 +9,7 @@ namespace TimeSheet.Core.Interfaces.Repositories
 {
     public interface IWorkItemRepository
     {
-        Task<IEnumerable<WorkItemModel>> GetCurrentSprintItems();
+        Task<IEnumerable<WorkItemEntry>> GetSprintItems(string sprintName);
         
     }
 }

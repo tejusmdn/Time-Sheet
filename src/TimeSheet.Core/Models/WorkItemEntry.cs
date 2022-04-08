@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TimeSheet.Core.Models
 {
-    public class WorkItemModel
+    public class WorkItemEntry
     {
-        public DateTime EntryDate { get; set; }
+        public DateTime EntryDate { get; set; } 
 
-        public float EntryHours { get; set; }
+        public float HoursEntered { get; set; }
 
         public int WorkItemId { get; set; }
     }
