@@ -12,6 +12,8 @@ namespace TimeSheet.Core.Models
 
         public string Title { get; set; }
 
+        public string IterationPath { get; set; }
+
         public Uri Url { get; set; }
 
         public float Effort { get; set; }
@@ -21,7 +23,5 @@ namespace TimeSheet.Core.Models
         public float Completed { get; set; }
 
         public User AssignedTo { get; set; }
-
-        
     }
 }

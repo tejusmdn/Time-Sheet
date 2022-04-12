@@ -29,7 +29,7 @@ namespace TimeSheet.Core.Services
 
             var workItemIds = result.WorkItems.DistinctBy(x => x.Id).Select(workItem => workItem.Id).ToList();
 
-            var workItems = await this.devOpsRepository.GetWorkItemsAsync(workItemIds);
+            var workItems = await this.devOpsRepository.GetWorkItemsAsync(workItemIds, Constants.Fields, DateTime.Today);
 
             var timeSheetData = new TimeSheetData()
             {

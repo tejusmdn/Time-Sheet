@@ -5,8 +5,6 @@ namespace TimeSheet.Core.Helpers
 {
     public static class WorkItemQueryHelper
     {
-        public static string[] Fields { get; } = new[] { "System.Id", "System.Title", "System.WorkItemType", "System.State", "System.IterationPath", "System.AssignedTo", "Microsoft.VSTS.Scheduling.Effort", "Microsoft.VSTS.Scheduling.RemainingWork", "Microsoft.VSTS.Scheduling.CompletedWork" };
-
         public static Wiql GetCurrentSprintWorkItemQuery(string project, string team, string user = null)
         {
             var queryStringBuilder = new StringBuilder();

@@ -6,6 +6,8 @@ using TfsWorkItem = Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models.Work
 
 namespace TimeSheet.Api.Helpers
 {
+    using TimeSheet.Core.Helpers;
+
     public class MapperProfile : Profile
     {
         public MapperProfile()
@@ -15,25 +17,26 @@ namespace TimeSheet.Api.Helpers
             this.CreateMap<TfsWorkItem, DevOpsWorkItem>()
                 .ForMember(item => item.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(item => item.Url, opt => opt.MapFrom(src => src.Url))
-                .ForMember(item => item.Title, opt => opt.MapFrom(src => src.Fields["System.Title"]))
+                .ForMember(item => item.Title, opt => opt.MapFrom(src => src.Fields[Constants.WorkItemTitleField]))
+                .ForMember(item => item.IterationPath, opt => opt.MapFrom(src => src.Fields[Constants.WorkItemIterationPathField]))
                 .ForMember(item => item.Completed,
                     opt => opt.MapFrom(src =>
-                        src.Fields.ContainsKey("Microsoft.VSTS.Scheduling.CompletedWork")
-                            ? src.Fields["Microsoft.VSTS.Scheduling.CompletedWork"]
+                        src.Fields.ContainsKey(Constants.WorkItemCompletedWorkField)
+                            ? src.Fields[Constants.WorkItemCompletedWorkField]
                             : 0))
                 .ForMember(item => item.Effort,
                     opt => opt.MapFrom(src =>
-                        src.Fields.ContainsKey("Microsoft.VSTS.Scheduling.Effort")
-                            ? src.Fields["Microsoft.VSTS.Scheduling.Effort"]
+                        src.Fields.ContainsKey(Constants.WorkItemEffortField)
+                            ? src.Fields[Constants.WorkItemEffortField]
                             : 0))
                 .ForMember(item => item.Remaining,
                     opt => opt.MapFrom(src =>
-                        src.Fields.ContainsKey("Microsoft.VSTS.Scheduling.RemainingWork")
-                            ? src.Fields["Microsoft.VSTS.Scheduling.RemainingWork"]
+                        src.Fields.ContainsKey(Constants.WorkItemRemainingWorkField)
+                            ? src.Fields[Constants.WorkItemRemainingWorkField]
                             : 0))
                 .ForMember(item => item.AssignedTo,
                     opt => opt.MapFrom(src =>
-                        src.Fields.ContainsKey("System.AssignedTo") ? src.Fields["System.AssignedTo"] : null));
+                        src.Fields.ContainsKey(Constants.WorkItemAssignedToField) ? src.Fields[Constants.WorkItemAssignedToField] : null));
 
 
 

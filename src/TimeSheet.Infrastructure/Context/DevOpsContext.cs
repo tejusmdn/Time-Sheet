@@ -28,11 +28,12 @@ namespace TimeSheet.Infrastructure.Context
             return  client.QueryByWiqlAsync(query).GetAwaiter().GetResult();
         }
 
-        public async Task<IEnumerable<WorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds)
+        public async Task<IEnumerable<WorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds, string[] fields = null,
+            DateTime? asOf = null)
         {
             using var client = new WorkItemTrackingHttpClient(this.devOpsUri, this.credentials);
 
-            return await client.GetWorkItemsAsync(workItemIds, WorkItemQueryHelper.Fields, DateTime.Today);
+            return await client.GetWorkItemsAsync(workItemIds, fields, asOf);
         }
     }
 }

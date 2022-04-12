@@ -28,9 +28,10 @@ namespace TimeSheet.Infrastructure.Repositories
             return this.devOpsContext.ExecuteQueryAsync(query).GetAwaiter().GetResult();
         }
 
-        public async Task<IEnumerable<DevOpsWorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds)
+        public async Task<IEnumerable<DevOpsWorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds,
+            string[] fields = null, DateTime? asOf = null)
         {
-            var workItems = await this.devOpsContext.GetWorkItemsAsync(workItemIds);
+            var workItems = await this.devOpsContext.GetWorkItemsAsync(workItemIds, fields, asOf);
 
             return this.mapper.Map<IEnumerable<DevOpsWorkItem>>(workItems);
         }

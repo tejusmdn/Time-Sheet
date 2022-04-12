@@ -12,6 +12,7 @@ namespace TimeSheet.Core.Interfaces.Repositories
     {
         Task<WorkItemQueryResult> ExecuteQueryAsync(Wiql query);
 
-        Task<IEnumerable<DevOpsWorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds);
+        Task<IEnumerable<DevOpsWorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds, string[] fields = null,
+            DateTime? asOf = null);
     }
 }
