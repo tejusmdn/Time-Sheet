@@ -21,9 +21,10 @@ namespace TimeSheet.Core.Services
             this.devOpsRepository = devOpsRepository ?? throw new ArgumentNullException(nameof(devOpsRepository));
         }
 
-        public async Task<TimeSheetData> GetCurrentSprintItems(string project, string team)
+        public async Task<TimeSheetData> GetCurrentSprintItems(string project, IEnumerable<string> teams)
         {
-            var wiql = WorkItemQueryHelper.GetCurrentSprintWorkItemQuery(project, team);
+
+            var wiql = WorkItemQueryHelper.GetCurrentSprintWorkItemQuery(project, teams);
 
             var result = await this.devOpsRepository.ExecuteQueryAsync(wiql);
 

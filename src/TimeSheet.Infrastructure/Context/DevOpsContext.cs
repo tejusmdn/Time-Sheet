@@ -25,6 +25,7 @@ namespace TimeSheet.Infrastructure.Context
         public async Task<WorkItemQueryResult> ExecuteQueryAsync(Wiql query)
         {
             using var client = new WorkItemTrackingHttpClient(this.devOpsUri, this.credentials);
+
             return  client.QueryByWiqlAsync(query).GetAwaiter().GetResult();
         }
 

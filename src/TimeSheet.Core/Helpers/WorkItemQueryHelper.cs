@@ -5,7 +5,7 @@ namespace TimeSheet.Core.Helpers
 {
     public static class WorkItemQueryHelper
     {
-        public static Wiql GetCurrentSprintWorkItemQuery(string project, string team, string user = null)
+        public static Wiql GetCurrentSprintWorkItemQuery(string project, IEnumerable<string> teams, string user = null)
         {
             var queryStringBuilder = new StringBuilder();
             queryStringBuilder.Append("Select [System.Id] FROM WorkItems WHERE ");
@@ -14,9 +14,23 @@ namespace TimeSheet.Core.Helpers
             {
                 queryStringBuilder.Append($" [System.TeamProject] = '{project}' And ");
 
-                if (!string.IsNullOrEmpty(team))
+                if (teams.Any())
                 {
-                    queryStringBuilder.Append($" [System.IterationPath] = @CurrentIteration('[{project}]\\{team}') And ");
+                    var teamCount = 0;
+
+                    foreach (var team in teams)
+                    {
+                        if (teamCount > 0)
+                        {
+                            queryStringBuilder.Append(" Or ");
+                        }
+
+                        queryStringBuilder.Append($" [System.IterationPath] = @CurrentIteration('[{project}]\\{team}') ");
+
+                        teamCount++;
+                    }
+
+                    queryStringBuilder.Append(" And ");
                 }
             }
 

@@ -26,9 +26,9 @@ namespace TimeSheet.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<WorkItemEntry>>> GetCurrentSprintItems([FromQuery] string project, [FromQuery] string team)
+        public async Task<ActionResult<IEnumerable<WorkItemEntry>>> GetCurrentSprintItems([FromQuery] string project, [FromQuery] string[] teams)
         {
-            var response = await this.timeSheetEntryService.GetCurrentSprintItems(project, team).ConfigureAwait(false);
+            var response = await this.timeSheetEntryService.GetCurrentSprintItems(project, teams.ToList()).ConfigureAwait(false);
 
             if (response == null)
             {
