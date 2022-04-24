@@ -9,6 +9,6 @@ namespace TimeSheet.Core.Interfaces.Services
 {
     public interface ITimeSheetEntryService
     {
-        Task<TimeSheetData> GetCurrentSprintItems(string project, IEnumerable<string> teams);
+        Task<TimeSheetData> GetCurrentSprintItems(string project);
     }
 }

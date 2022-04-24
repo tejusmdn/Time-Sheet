@@ -11,6 +11,8 @@ using TimeSheet.Core.Helpers;
 
 namespace TimeSheet.Infrastructure.Context
 {
+    using Microsoft.TeamFoundation.Core.WebApi;
+
     public class DevOpsContext
     {
         private readonly Uri devOpsUri;
@@ -35,6 +37,23 @@ namespace TimeSheet.Infrastructure.Context
             using var client = new WorkItemTrackingHttpClient(this.devOpsUri, this.credentials);
 
             return await client.GetWorkItemsAsync(workItemIds, fields, asOf);
+        }
+
+        public async Task<TeamProject?> GetProject(string projectName)
+        {
+            Guid? projectId;
+            using (var client = new ProjectHttpClient(this.devOpsUri, this.credentials))
+            {
+                var projects = await client.GetProjects(getDefaultTeamImageUrl:true);
+                projectId = projects.FirstOrDefault(x => x.Name.Equals(projectName))?.Id;
+
+                if (projectId == null)
+                {
+                    return null;
+                }
+
+                return await client.GetProject(projectId?.ToString());
+            }
         }
     }
 }

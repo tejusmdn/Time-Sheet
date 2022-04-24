@@ -35,5 +35,12 @@ namespace TimeSheet.Infrastructure.Repositories
 
             return this.mapper.Map<IEnumerable<DevOpsWorkItem>>(workItems);
         }
+
+        public async Task<Project> GetProject(string projectName)
+        {
+            var project = await this.devOpsContext.GetProject(projectName);
+            return this.mapper.Map<Project>(project);
+
+        }
     }
 }

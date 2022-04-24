@@ -3,33 +3,27 @@ using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 
 namespace TimeSheet.Core.Helpers
 {
+    using TimeSheet.Core.Models;
+
     public static class WorkItemQueryHelper
     {
-        public static Wiql GetCurrentSprintWorkItemQuery(string project, IEnumerable<string> teams, string user = null)
+        public static Wiql GetCurrentSprintWorkItemQuery(Project project, string user = null)
         {
+            if (project == null)
+            {
+                return null;
+            }
+
             var queryStringBuilder = new StringBuilder();
             queryStringBuilder.Append("Select [System.Id] FROM WorkItems WHERE ");
 
-            if (!string.IsNullOrEmpty(project))
+            if (!string.IsNullOrEmpty(project.Name))
             {
-                queryStringBuilder.Append($" [System.TeamProject] = '{project}' And ");
+                queryStringBuilder.Append($" [System.TeamProject] = '{project.Name}' And ");
 
-                if (teams.Any())
+                if (!string.IsNullOrEmpty(project.DefaultTeam.Name))
                 {
-                    var teamCount = 0;
-
-                    foreach (var team in teams)
-                    {
-                        if (teamCount > 0)
-                        {
-                            queryStringBuilder.Append(" Or ");
-                        }
-
-                        queryStringBuilder.Append($" [System.IterationPath] = @CurrentIteration('[{project}]\\{team}') ");
-
-                        teamCount++;
-                    }
-
+                    queryStringBuilder.Append($" [System.IterationPath] = @CurrentIteration('[{project.Name}]\\{project.DefaultTeam.Name}') ");
                     queryStringBuilder.Append(" And ");
                 }
             }

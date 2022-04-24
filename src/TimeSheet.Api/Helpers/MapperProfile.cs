@@ -6,6 +6,7 @@ using TfsWorkItem = Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models.Work
 
 namespace TimeSheet.Api.Helpers
 {
+    using Microsoft.TeamFoundation.Core.WebApi;
     using TimeSheet.Core.Helpers;
 
     public class MapperProfile : Profile
@@ -38,7 +39,8 @@ namespace TimeSheet.Api.Helpers
                     opt => opt.MapFrom(src =>
                         src.Fields.ContainsKey(Constants.WorkItemAssignedToField) ? src.Fields[Constants.WorkItemAssignedToField] : null));
 
-
+            this.CreateMap<TeamProject, Project>();
+            this.CreateMap<WebApiTeamRef, Team>();
 
         }
     }
