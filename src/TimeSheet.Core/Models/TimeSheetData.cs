@@ -10,6 +10,6 @@ namespace TimeSheet.Core.Models
     {
         public IEnumerable<DevOpsWorkItem> WorkItems { get; set; }
 
-        public IEnumerable<WorkItemEntry> WorkItemEntries { get; set; }
+        public IEnumerable<WorkItemEntry> Entries { get; set; }
     }
 }

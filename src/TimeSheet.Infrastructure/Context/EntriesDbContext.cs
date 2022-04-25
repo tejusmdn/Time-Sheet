@@ -9,12 +9,12 @@ namespace TimeSheet.Infrastructure.Context
 {
     using Microsoft.Azure.Cosmos;
 
-    public class WorkItemDbContext
+    public class EntriesDbContext
     {
         private readonly string endPoint;
         private readonly string key;
 
-        public WorkItemDbContext(string endPoint, string key)
+        public EntriesDbContext(string endPoint, string key)
         {
             this.endPoint = endPoint;
             this.key = key;

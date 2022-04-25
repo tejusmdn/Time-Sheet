@@ -28,7 +28,7 @@ namespace TimeSheet.Infrastructure.Context
         {
             using var client = new WorkItemTrackingHttpClient(this.devOpsUri, this.credentials);
 
-            return  client.QueryByWiqlAsync(query).GetAwaiter().GetResult();
+            return client.QueryByWiqlAsync(query).GetAwaiter().GetResult();
         }
 
         public async Task<IEnumerable<WorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds, string[] fields = null,
@@ -41,19 +41,16 @@ namespace TimeSheet.Infrastructure.Context
 
         public async Task<TeamProject?> GetProject(string projectName)
         {
-            Guid? projectId;
-            using (var client = new ProjectHttpClient(this.devOpsUri, this.credentials))
+            using var client = new ProjectHttpClient(this.devOpsUri, this.credentials);
+            var projects = await client.GetProjects(getDefaultTeamImageUrl:true);
+            var projectId = projects.FirstOrDefault(x => x.Name.Equals(projectName))?.Id;
+
+            if (projectId == null)
             {
-                var projects = await client.GetProjects(getDefaultTeamImageUrl:true);
-                projectId = projects.FirstOrDefault(x => x.Name.Equals(projectName))?.Id;
-
-                if (projectId == null)
-                {
-                    return null;
-                }
-
-                return await client.GetProject(projectId?.ToString());
+                return null;
             }
+
+            return await client.GetProject(projectId?.ToString());
         }
     }
 }

@@ -7,11 +7,11 @@ namespace TimeSheet.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WorkItemController : ControllerBase
+    public class TimeSheetController : ControllerBase
     {
         private readonly ITimeSheetEntryService timeSheetEntryService;
 
-        public WorkItemController(ITimeSheetEntryService timeSheetEntryService)
+        public TimeSheetController(ITimeSheetEntryService timeSheetEntryService)
         {
             this.timeSheetEntryService = timeSheetEntryService ?? throw new ArgumentNullException(nameof(timeSheetEntryService));
         }
@@ -26,7 +26,7 @@ namespace TimeSheet.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<WorkItemEntry>>> GetCurrentSprintItems([FromQuery] string project)
+        public async Task<ActionResult<TimeSheetData>> GetCurrentSprintItems([FromQuery] string project)
         {
             var response = await this.timeSheetEntryService.GetCurrentSprintItems(project).ConfigureAwait(false);
 

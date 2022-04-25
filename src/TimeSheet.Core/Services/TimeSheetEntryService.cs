@@ -12,12 +12,12 @@ namespace TimeSheet.Core.Services
 {
     public class TimeSheetEntryService : ITimeSheetEntryService
     {
-        private readonly IWorkItemRepository workItemRepository;
+        private readonly IEntriesRepository entriesRepository;
         private readonly IDevOpsRepository devOpsRepository;
 
-        public TimeSheetEntryService(IWorkItemRepository workItemRepository, IDevOpsRepository devOpsRepository)
+        public TimeSheetEntryService(IEntriesRepository entriesRepository, IDevOpsRepository devOpsRepository)
         {
-            this.workItemRepository = workItemRepository ?? throw new ArgumentNullException(nameof(workItemRepository));
+            this.entriesRepository = entriesRepository ?? throw new ArgumentNullException(nameof(entriesRepository));
             this.devOpsRepository = devOpsRepository ?? throw new ArgumentNullException(nameof(devOpsRepository));
         }
 
@@ -41,6 +41,16 @@ namespace TimeSheet.Core.Services
             //Todo : Retrieve the entries from DB and append to the user's data.
 
             return timeSheetData;
+        }
+
+        public async Task<bool> UpdateTimeSheetEntry(TimeSheetData data)
+        {
+            // Todo : Step 1 - Get Current entries for the work item from cosmos db. 
+            // Todo : Step 2 - Compare the stored entries to the newly entries. 
+            // Todo : Step 3 - If the values have changed, update the completed and remaining hours for the work item
+            // Todo : Step 4 - Update the CosmosDB entries record
+
+            return false;
         }
     }
 }

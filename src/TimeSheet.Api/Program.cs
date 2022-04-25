@@ -45,15 +45,15 @@ static void RegisterApplicationServices(WebApplicationBuilder builder)
 
     builder.Services.AddScoped<ITimeSheetEntryService, TimeSheetEntryService>();
     builder.Services.AddScoped<IDevOpsRepository, DevOpsRepository>();
-    builder.Services.AddScoped<IWorkItemRepository, WorkItemRepository>();
+    builder.Services.AddScoped<IEntriesRepository, EntriesRepository>();
 }
 
-static async Task<WorkItemDbContext> InitializeCosmosDb(IConfigurationSection configurationSection)
+static async Task<EntriesDbContext> InitializeCosmosDb(IConfigurationSection configurationSection)
 {
     var account = configurationSection.GetSection("account").Value;
     var key = configurationSection.GetSection("key").Value;
 
-    return new WorkItemDbContext(account, key);
+    return new EntriesDbContext(account, key);
 }
 
 static async Task<DevOpsContext> InitializeDevOpsContext(IConfigurationSection configurationSection)

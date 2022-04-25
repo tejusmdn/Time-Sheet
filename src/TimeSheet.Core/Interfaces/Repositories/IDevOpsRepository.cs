@@ -15,6 +15,6 @@ namespace TimeSheet.Core.Interfaces.Repositories
         Task<IEnumerable<DevOpsWorkItem>> GetWorkItemsAsync(IEnumerable<int> workItemIds, string[] fields = null,
             DateTime? asOf = null);
 
-        Task<Project> GetProject(string projectName);
+        Task<Project?> GetProject(string projectName);
     }
 }

@@ -10,14 +10,14 @@ using TimeSheet.Infrastructure.Context;
 
 namespace TimeSheet.Infrastructure.Repositories
 {
-    public class WorkItemRepository : IWorkItemRepository
+    public class EntriesRepository : IEntriesRepository
     {
-        public WorkItemDbContext workItemDbContext;
+        public EntriesDbContext EntriesDbContext;
         //private readonly IMapper mapper;
 
-        public WorkItemRepository(WorkItemDbContext dbContext/*, IMapper mapper*/)
+        public EntriesRepository(EntriesDbContext dbContext/*, IMapper mapper*/)
         {
-            this.workItemDbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            this.EntriesDbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             //this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 

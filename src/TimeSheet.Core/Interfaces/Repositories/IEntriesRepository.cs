@@ -7,7 +7,7 @@ using TimeSheet.Core.Models;
 
 namespace TimeSheet.Core.Interfaces.Repositories
 {
-    public interface IWorkItemRepository
+    public interface IEntriesRepository
     {
         Task<IEnumerable<WorkItemEntry>> GetSprintItems(string sprintName);
         

@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace TimeSheet.Infrastructure.Entities
 {
-    public class WorkItem
+    public class EntryDetails
     {
-        public string Id { get; set; }
-        
-        public DateTime EntryDate { get; set; } 
-        
-        public float EntryHours { get; set; }
-
         public string UserId { get; set; }
 
-        public int WorkItemId { get; set; }
+        public DateTime EntryDate { get; set; }
+
+        public float Hours { get; set; }
     }
 }

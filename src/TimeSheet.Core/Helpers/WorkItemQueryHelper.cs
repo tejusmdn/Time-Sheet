@@ -7,7 +7,7 @@ namespace TimeSheet.Core.Helpers
 
     public static class WorkItemQueryHelper
     {
-        public static Wiql GetCurrentSprintWorkItemQuery(Project project, string user = null)
+        public static Wiql GetCurrentSprintWorkItemQuery(Project? project, string user = null)
         {
             if (project == null)
             {
